@@ -7,6 +7,8 @@ This file creates your application.
 
 from app import app
 from flask import render_template, request, redirect, url_for
+from app.form import PropertyForm
+from app.models import Property
 
 
 ###
@@ -24,7 +26,53 @@ def about():
     """Render the website's about page."""
     return render_template('about.html', name="Mary Jane")
 
+@app.route('/properties')
+def properties():
+    query_lst = Property.query.all()
+    lst_of_properties = []
+    
+    for lst_of_properties  in query_lst:
+        lst_of_properties.append({"title":query_lst.title, "price":query_lst.price, "location":query_lst.location, "photo":query_lst.image, "id":query_lst.id})
+    
+    return render_template("properties.html", lst_of_properties = lst_of_properties)
 
+@app.route('/property/<propertyid>')
+def getProperty(propertyid):
+    query = Property.query.filter_by(id=propertyid).first()
+    
+    if query  is None:
+        return redirect(url_for('home'))
+    
+    return render_template("property.html", query=query)
+
+@app.route("/property", methods=["GET", "POST"])
+def newProperty():
+    form = PropertyForm()
+    if request.method == "POST":
+        if form.validate_on_submit():
+            title = form.title.data 
+            bedRoom_number = form.bedRoom_number.data
+            bathRoom_number = form.bathRoom_number.data
+            location = form.location.data
+            price = form.price.data
+            property_type = form.property_type.data
+            description = form.description.data
+            image = form.image.data
+            filename = secure_filename(form.image)
+            formImage.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+            pro = Property(title,bedRoom_number,bathRoom_number,location,price,property_type,description,filename)
+
+            db.session.add(pro)
+            db.session.commit()
+
+            flash('Property Saved', 'success')
+            return redirect(url_for('properties'))
+        flash('Not valid','danger')
+        
+    return render_template('upload.html',form=form)
+
+
+    
 ###
 # The functions below should be applicable to all Flask apps.
 ###
