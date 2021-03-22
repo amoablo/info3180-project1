@@ -1,3 +1,52 @@
 body {
     padding-top: 50px;
 }
+
+.main-page{
+    background-color:rgb(185, 184, 184);
+    margin: 0 !important;
+    max-width: 100% !important;
+    padding-left: 10rem !important;
+    padding-top: 2rem;
+    padding-bottom: 5rem;
+}
+
+.property_form{
+    max-width: 50rem !important;
+    padding-bottom: 5rem;
+}
+
+.myform{
+    background-color: white;
+    padding: 2rem 1rem;
+    padding-right: 10rem;
+    border-radius: 5px;
+}
+
+.form_title{
+    font-weight: bold;
+    font-size: 20px;
+}
+
+#form_header{
+    font-weight: bold;
+}
+
+.f-input{
+    display: flex;
+    flex-direction: column;
+    margin: 1rem 0px;
+}
+
+.fm-row{
+    display: flex;
+    flex-direction: row;
+}
+
+.mar_left{
+    margin-right: 3rem;
+}
+
+.mar_right{
+
+}

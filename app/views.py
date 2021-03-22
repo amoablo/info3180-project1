@@ -5,10 +5,13 @@ Werkzeug Documentation:  http://werkzeug.pocoo.org/documentation/
 This file creates your application.
 """
 
-from app import app
-from flask import render_template, request, redirect, url_for
+from app import app,db
+from flask import render_template, request, redirect, url_for, flash, send_from_directory
 from app.form import PropertyForm
 from app.models import Property
+from werkzeug.utils import secure_filename
+import os
+
 
 
 ###
@@ -29,12 +32,7 @@ def about():
 @app.route('/properties')
 def properties():
     query_lst = Property.query.all()
-    lst_of_properties = []
-    
-    for lst_of_properties  in query_lst:
-        lst_of_properties.append({"title":query_lst.title, "price":query_lst.price, "location":query_lst.location, "photo":query_lst.image, "id":query_lst.id})
-    
-    return render_template("properties.html", lst_of_properties = lst_of_properties)
+    return render_template("properties.html", query_lst = query_lst)
 
 @app.route('/property/<propertyid>')
 def getProperty(propertyid):
@@ -43,33 +41,32 @@ def getProperty(propertyid):
     if query  is None:
         return redirect(url_for('home'))
     
-    return render_template("property.html", query=query)
+    return render_template("property_view.html", query=query)
 
 @app.route("/property", methods=["GET", "POST"])
 def newProperty():
     form = PropertyForm()
-    if request.method == "POST":
-        if form.validate_on_submit():
-            title = form.title.data 
-            bedRoom_number = form.bedRoom_number.data
-            bathRoom_number = form.bathRoom_number.data
-            location = form.location.data
-            price = form.price.data
-            property_type = form.property_type.data
-            description = form.description.data
-            image = form.image.data
-            filename = secure_filename(form.image)
-            formImage.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-            pro = Property(title,bedRoom_number,bathRoom_number,location,price,property_type,description,filename)
+    if request.method == "POST" and form.validate_on_submit():
+        title = form.title.data 
+        bedRoom_number = form.bedRoom_number.data
+        bathRoom_number = form.bathRoom_number.data
+        location = form.location.data
+        price = form.price.data
+        property_type = form.property_type.data
+        description = form.description.data
+        image = request.files['image']
+        filename = secure_filename(image.filename)
+        image.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
 
-            db.session.add(pro)
-            db.session.commit()
+        pro = Property(title,bedRoom_number,bathRoom_number,location,price,property_type,description,filename)
+        db.session.add(pro)
+        db.session.commit()
 
-            flash('Property Saved', 'success')
-            return redirect(url_for('properties'))
-        flash('Not valid','danger')
-        
-    return render_template('upload.html',form=form)
+        flash('Property Saved', 'success')
+        return redirect('/properties')
+    else:
+        flash_errors(form)
+    return render_template('property.html',form=form)
 
 
     
@@ -91,6 +88,11 @@ def send_text_file(file_name):
     """Send your static text file."""
     file_dot_text = file_name + '.txt'
     return app.send_static_file(file_dot_text)
+
+@app.route('/uploads/<filename>')
+def get_image(filename):
+    cd = os.getcwd()
+    return send_from_directory(os.path.join(cd,app.config['UPLOAD_FOLDER']), filename)
 
 
 @app.after_request

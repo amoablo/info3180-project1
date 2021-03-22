@@ -17,14 +17,14 @@ class Property(db.Model):
 
 
     def __init__(self,title,bedRoom_number,bathRoom_number,location,price,property_type,description,image):
-        self.title
-        self.bedRoom_number
-        self.bathRoom_number
-        self.location
-        self.price
-        self.property_type
-        self.description
-        self.image
+        self.title = title
+        self.bedRoom_number = bedRoom_number
+        self.bathRoom_number = bathRoom_number
+        self.location = location
+        self.price = price
+        self.property_type = property_type
+        self.description = description
+        self.image = image
         
 
 

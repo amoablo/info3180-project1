@@ -8,22 +8,22 @@
 	<div class="paddding">
 	<div class="grid-container">
 	
-    {% for p in lst_of_properties %}
+    {% for p in query_lst %}
     <div class="prop ">
-        <image src="{{ url_for('get_image', filename=pty['photo']) }}" class="display-grid-pic">
+        <image src="{{ url_for('get_image', filename=p.image) }}" class="display-grid-pic">
         <div class="text-paddding">
 		<div class="margin">
-            <span class="headr ">{{ p['title'] }}</span>
+            <span class="headr ">{{ p.title }}</span>
 			</div>
 			<div >			
-            <span class="faide">{{ p['location'] }}</span> 
+            <span class="faide">{{ p.location }}</span> 
 			</div>
 			<div class="margin-top margin-bottom">
-            <span class="btn-style">{{ p['price'] }}</span>
+            <span class="btn-style">{{ p.price }}</span>
 			</div>
         </div>
 		<div class="view-btn" >
-            <a class="" href="{{ url_for('getProperty', propertyid=pty['id']) }}">View Property</a>
+            <a class="" href="{{ url_for('getProperty', propertyid=p.id) }}">View Property</a>
         </div>
  </div>
     {% endfor %}

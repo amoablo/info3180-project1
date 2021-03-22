@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block main %}
+<div class="space">
+<div class="ind-prop Row">
+		<div class="">
+        <img class="prop_pic" src="{{ url_for('get_image', filename = query.image) }}"/>
+        </div>
+		<div class="text-paddding2">
+			<span class="ind-headr ">{{query.title}}</span>
+            <div class="Row margin-top{">
+			<span class="btn-style2 blk">{{query.price}}</span>
+			<span class="blk btn-style3 margin-left">{{query.ptype}}</span>
+             </div>
+			<span class="blk margin-top text-box">{{query.description}}</span>
+			<div class="Row margin-top2 ">
+			<span class="blk">{{query.bedRoom_number}} bedrooms</span>
+            <span class="blk margin-left">{{query.bathRoom_number}} bathrooms</span>
+             </div>
+			<span class="blk margin-top2">{{query.location}}</span>
+		<div class="margin-top2 view-btn2 color margin-bottom">	
+        <a href="#" class="color">Send Realtor</a>
+		</div>
+	   </div>
+    
+</div>
+</div>
+{% endblock %}

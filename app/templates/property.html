@@ -1,32 +1,76 @@
 {% extends "base.html" %}
 
-{% block css %}
-   <link rel="stylesheet" href="{{ url_for('static', filename='css/app.css') }}" type="text/css" />
-{% endblock %}
-
 {% block main %}
-<div class="space">
-<div class="ind-prop Row">
+
+{% include "flash_messages.html" %}
+
+<div class="property_form">
+	<h1 id="form_header">Add New Property</h1>
+	<form class="myform" action="{{ url_for('newProperty') }}" enctype="multipart/form-data" method="POST">
 		<div class="">
-        <img class="prop_pic"   src="{{ url_for('get_image', filename = pptyH.photo) }}"/>
-        </div>
-		<div class="text-paddding2">
-			<span class="ind-headr ">{{pptyH.title}}</span>
-            <div class="Row margin-top{">
-			<span class="btn-style2 blk">{{pptyH.price}}</span>
-			<span class="blk btn-style3 margin-left">{{pptyH.ptype}}</span>
-             </div>
-			<span class="blk margin-top text-box">{{pptyH.description}}</span>
-			<div class="Row margin-top2 ">
-			<span class="blk">{{pptyH.number_of_bedrooms}} bedrooms</span>
-            <span class="blk margin-left">{{pptyH.number_of_bathrooms}} bathrooms</span>
-             </div>
-			<span class="blk margin-top2">{{pptyH.location}}</span>
-		<div class="margin-top2 view-btn2 color margin-bottom">	
-        <a href="#" class="color">Send Realtor</a>
+			{{form.csrf_token}}
+			<div class="">
+				<div class="f-input">
+				{{form.title.label(class = "form_title")}}
+				{{form.title}}
+				</div>
+			</div>
+
+			<div class="">
+				<div class="f-input">
+					{{form.description.label(class = "form_title")}}
+					{{form.description}}
+				</div>
+			</div>	
+
+			<div class="fm-row">
+				<div class="f-input mar_left">
+					{{form.bedRoom_number.label(class = "form_title")}}
+					{{form.bedRoom_number}}
+				</div>
+
+				<div class="f-input mar_right">
+					{{form.bathRoom_number.label(class = "form_title")}} 
+					{{form.bathRoom_number}} 
+				</div>
+			</div>
+
+			<div class="fm-row">
+				<div class="f-input mar_left">
+					{{form.price.label(class = "form_title")}}
+					{{form.price}}
+				</div>
+
+				<div class="f-input mar_right">
+					{{form.property_type.label(class = "form_title")}}
+					{{form.property_type}}
+				</div>
+			</div>
+
+
+				<div class="">
+					<div class="f-input">
+						{{form.location.label(class = "form_title")}}
+						{{form.location}}
+					</div>
+
+				</div>
+				<div class="">
+					<div class="f-input">
+						{{form.image.label(class = "form_title")}}
+						{{form.image}}
+					</div>
+				</div>
+			<div class="">
+				<div class=" ">
+					<button type="submit" name="submit" class="btn btn-primary">Submit</button>
+				</div>
+			</div>
 		</div>
-	   </div>
+	</form>
+
+</div>
+
     
-</div>
-</div>
+
 {% endblock %}
