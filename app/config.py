@@ -2,6 +2,7 @@ import os
 
 class Config(object):
     """Base Config Object"""
+    """ Extra comment"""
     DEBUG = False
     SECRET_KEY = os.environ.get('SECRET_KEY') or 'Som3$ec5etK*y'
     SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL') or 'postgresql://user:password@localhost/project1'
@@ -9,7 +10,7 @@ class Config(object):
     UPLOAD_FOLDER = os.environ.get('UPLOAD_FOLDER') or './uploads'
 
 class DevelopmentConfig(Config):
-    """Development Config that extends the Base Config Object"""
+    """Development Config that extends the Base Config Object  """
     DEVELOPMENT = True
     DEBUG = True
 
