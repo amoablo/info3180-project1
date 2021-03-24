@@ -6,3 +6,4 @@ app = Flask(__name__)
 db = SQLAlchemy(app)
 app.config.from_object(Config)
 from app import views
+print(app.config)
