@@ -1,28 +1,30 @@
 {% extends "base.html" %}
 
 {% block main %}
-<div class="space">
-<div class="ind-prop Row">
-		<div class="">
-        <img class="prop_pic" src="{{ url_for('get_image', filename = query.image) }}"/>
-        </div>
-		<div class="text-paddding2">
-			<span class="ind-headr ">{{query.title}}</span>
-            <div class="Row margin-top{">
-			<span class="btn-style2 blk">{{query.price}}</span>
-			<span class="blk btn-style3 margin-left">{{query.ptype}}</span>
-             </div>
-			<span class="blk margin-top text-box">{{query.description}}</span>
-			<div class="Row margin-top2 ">
-			<span class="blk">{{query.bedRoom_number}} bedrooms</span>
-            <span class="blk margin-left">{{query.bathRoom_number}} bathrooms</span>
-             </div>
-			<span class="blk margin-top2">{{query.location}}</span>
-		<div class="margin-top2 view-btn2 color margin-bottom">	
-        <a href="#" class="color">Send Realtor</a>
+<div class="outer">
+		<div class="card mb-3 sh" style="max-width: 750px;">
+			<div class="row no-gutters">
+			<div class="col-md-4">
+				<img class="card-img-top card-image" src="{{ url_for('get_image', filename = query.image) }}"/>
+			</div>
+			<div class="col-md-8">
+				<div class="card-body">
+				<h5 class="card-title">{{query.title}}</h5>
+				<button type="button" class="btn btn-primary px-0 py-0">${{query.price}}  </button>  <button type="button" class="btn btn-warning px-0 py-0"> {{query.property_type}}</button>
+				<p class="card-text">{{query.description}}</p>
+				<p class="card-text"><i class="fas fa-bed"></i> {{query.bedRoom_number}} Bedrooms   <i class="fas fa-shower"></i> {{query.bathRoom_number}} Bathrooms</p>
+				<p class="card-text text-muted"><i class="fas fa-map-marker-alt"></i>  {{ query.location }}</p>
+	
+	
+				<a class="btn btn-primary specific-green" href="#">Email Realtor</a>
+				</div>
+			</div>
+	
+			</div>
+			<div class="card-footer">
+				
+			</div>
 		</div>
-	   </div>
-    
-</div>
 </div>
 {% endblock %}
+

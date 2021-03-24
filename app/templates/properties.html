@@ -3,31 +3,25 @@
 {% block main%}
 {% include "flash_messages.html"%}
 
-<div class="prop-container ">
-    <h1 class="title2">Properties</h1>
-	<div class="paddding">
-	<div class="grid-container">
-	
+
+<h1 class="pro-title">Properties</h1>
+    <div class="card-deck">	
     {% for p in query_lst %}
-    <div class="prop ">
-        <image src="{{ url_for('get_image', filename=p.image) }}" class="display-grid-pic">
-        <div class="text-paddding">
-		<div class="margin">
-            <span class="headr ">{{ p.title }}</span>
-			</div>
-			<div >			
-            <span class="faide">{{ p.location }}</span> 
-			</div>
-			<div class="margin-top margin-bottom">
-            <span class="btn-style">{{ p.price }}</span>
-			</div>
-        </div>
-		<div class="view-btn" >
-            <a class="" href="{{ url_for('getProperty', propertyid=p.id) }}">View Property</a>
-        </div>
- </div>
+
+        <div class="card">
+            <image src="{{ url_for('get_image', filename=p.image) }}" class="card-img-top" alt="...">
+            <div class="card-body">
+              <h5 class="card-title font-weight-bold mb-1">{{ p.title }}</h5>
+              <p class="card-text text-muted"><i class="fas fa-map-marker-alt"></i>  {{ p.location }}</p>
+              <span class="badge badge-pill badge-primary px-3 py-2">${{ p.price }}</span>
+            </div>
+
+            <div class="card-footer">
+                <a class="btn btn-block specific-green" href="{{ url_for('getProperty', propertyid=p.id) }}">View Property</a>
+            </div>
+          </div>
+
+        
     {% endfor %}
-	</div>
-		</div>
-</div>
+    </div>
 {% endblock%}

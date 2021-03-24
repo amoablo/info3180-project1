@@ -50,3 +50,79 @@ body {
 .mar_right{
 
 }
+
+.pro-title{
+    font-weight: bold;
+}
+
+.space{
+    background-color:rgb(185, 184, 184);
+    margin: 0 !important;
+    max-width: 100% !important;
+    padding-left: 10rem !important;
+    padding-top: 2rem;
+    padding-bottom: 5rem;
+
+}
+
+.img{
+    
+}
+
+.input{
+    display: flex;
+    flex-direction: column;    
+}
+
+.card-footer > a.btn{
+
+    padding-top: 0.8rem !important;
+    padding-bottom: 0.8rem !important;
+    border-top-left-radius: 0 !important;
+    border-top-right-radius: 0 !important;
+    font-weight: bold;
+    color: white;
+}
+
+.card-footer{
+    padding: 0 !important;
+}
+
+.card-img-top {
+    height:12rem !important;
+
+}
+
+.card{
+    max-width: 30%;
+}
+
+.specific-green{
+    background-color: #14b7a6 !important;
+}
+
+.btn-warning{
+    color:white !important;
+}
+
+.card-image{
+    height: 20rem !important;
+    background-position: center center;
+    background-repeat: no-repeat;
+}
+
+.outer{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.sh{
+    box-shadow:5px 0px 2px 0px #888;
+    
+}
+
+.bx{
+    box-shadow:  1px 2px 0px #888
+}
