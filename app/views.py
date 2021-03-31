@@ -17,7 +17,7 @@ import os
 ###
 # Routing for your application.
 ###
-
+db.create_all()
 @app.route('/')
 def home():
     """Render website's home page."""
